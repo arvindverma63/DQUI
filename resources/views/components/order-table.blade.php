@@ -64,7 +64,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                     </div>
                                     <div class="offcanvas-body">
-                                        <p><strong>Customer:</strong> {{ $order['user']['firstName'] ?? 'N/A' }} {{ $order['user']['lastName'] ?? '' }}</p>
+                                        <p><strong>Customer:</strong> {{ $order['user']['name'] ?? 'N/A' }}</p>
                                         <p><strong>Table Number:</strong> {{ $order['table_number'] }}</p>
                                         <p><strong>Status:</strong> {{ ucfirst($order['status']) }}</p>
                                         <p><strong>Total:</strong> ${{ number_format($order['total'], 2) }}</p>

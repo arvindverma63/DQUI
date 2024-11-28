@@ -107,4 +107,15 @@ class AuthController extends Controller
         // Redirect to the login page
         return redirect()->route('login')->with('message', 'Logged out successfully.');
     }
+    public function getAuth(){
+        $token = Cache::get('token');
+        $restaurantId = Cache::get('restaurant_id');
+        $app_url = env('API_BASE_URL');
+
+        return response()->json([
+            'token'=>$token,
+            'restaurantId'=>$restaurantId,
+            'app_url'=>$app_url,
+        ]);
+    }
 }

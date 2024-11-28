@@ -47,27 +47,12 @@
                                 </div><!--//dropdown-menu-title-->
                                 <div class="dropdown-menu-content">
 
-                                    <div class="item p-3">
-                                        <div class="row gx-2 justify-content-between align-items-center">
-                                            <div class="col-auto">
-                                                <div class="app-icon-holder">
-                                                    <i class="fa-light fa-utensils"></i>
-                                                </div>
-                                            </div><!--//col-->
-                                            <div class="col">
-                                                <div class="info">
-                                                    <div class="desc">You have a new invoice. Proin venenatis interdum
-                                                        est.</div>
-                                                    <div class="meta"> 1 day ago</div>
-                                                </div>
-                                            </div><!--//col-->
-                                        </div><!--//row-->
-                                        <a class="link-mask" href="notifications.html"></a>
-                                    </div><!--//item-->
+
+                                    <script src="{{asset('assets/js/notification.js')}}"></script>
                                 </div><!--//dropdown-menu-content-->
 
                                 <div class="dropdown-menu-footer p-2 text-center">
-                                    <a href="{{ route('notification') }}">View all</a>
+                                    <a href="">View all</a>
                                 </div>
 
                             </div><!--//dropdown-menu-->
@@ -440,3 +425,6 @@
         </div><!--//sidepanel-inner-->
     </div><!--//app-sidepanel-->
 </header><!--//app-header-->
+                                    <!-- Toast Container -->
+                                    <div id="toast-container" aria-live="polite" aria-atomic="true" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1000;">
+                                    </div>

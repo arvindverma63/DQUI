@@ -38,6 +38,7 @@ Route::middleware(['auth.token'])->group(function () {
     Route::get('/dashboard', function () {
         return view('index');
     })->name('dashboard');
+    Route::get('/getAuth',[AuthController::class,'getAuth']);
 
     Route::get('/menu', [PageController::class, 'menu'])->name('menu');
     Route::get('/account', [PageController::class, 'account'])->name('account');
@@ -66,6 +67,8 @@ Route::middleware(['auth.token'])->group(function () {
     Route::put('/updateSupplier/{id}', [SupplierController::class, 'updateSupplier'])->name('update.supplier');
     Route::post('/add/stock', [InventoryController::class, 'addInventory'])->name('add.stock');
     Route::get('/stock', [PageController::class, 'stock'])->name('stock');
+    Route::put('/updatestock/{id}', [InventoryController::class, 'updateStock']);
+
     Route::get('/deleteStock/{id}', [InventoryController::class, 'deleteStock'])->name('delete.stock');
 
     Route::get('getAllStocks', [InventoryController::class, 'getStock'])->name('getAllStock');
@@ -88,4 +91,6 @@ Route::middleware(['auth.token'])->group(function () {
     Route::get('/qr',[QrController::class,'qrView'])->name('qr');
     Route::post('/addQr',[QrController::class,'addQr']);
     Route::get('/deleteQr/{id}',[QrController::class,'deleteQr']);
+
+    Route::get('/getNotification',[OrderController::class,'getNotification']);
 });

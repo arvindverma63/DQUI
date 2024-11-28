@@ -71,6 +71,18 @@ public function updateStatus(Request $request, $id)
     }
 }
 
+public function getNotification(){
+    $token = Cache::get('token');
+    $restaurantId = Cache::get('restaurant_id');
+    $app_url = env('API_BASE_URL');
+    $response = Http::withHeaders([
+        'Authorization'=>'Bearer'.$token,
+    ])->get($app_url.'/notification/'.$restaurantId);
+
+    if($response){
+        return response()->json($response);
+    }
+}
 
 
 

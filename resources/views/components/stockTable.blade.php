@@ -26,7 +26,7 @@
             </div>
             <div class="modal-body">
                 <!-- Stock Form -->
-                <form id="stockForm-{{ $stock['id'] }}" method="POST" action="">
+                <form id="stockForm-{{ $stock['id'] }}" method="POST" action="/updatestock/{{$stock['id']}}">
                     @csrf
                     @method('PUT')
 

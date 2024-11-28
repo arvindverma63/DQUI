@@ -18,7 +18,9 @@
 
 function playSound(type = 'success') {
     const audio = new Audio(type === 'error' ? '/sounds/error.mp3' : 'assets/js/sweetalert2/preview.mp3');
-    audio.play();
+    audio.play().catch((err) => {
+        console.error('Audio play failed:', err);
+    });
 }
 
 function showToast(message, type = 'success') {
@@ -46,6 +48,9 @@ function showToast(message, type = 'success') {
     bsToast.show();
 }
 
+let restaurantId;
+let token;
+let appUrl;
 function getNotification() {
     // Fetch the authenticated user's restaurant ID
     fetch('/getAuth')
@@ -56,9 +61,9 @@ function getNotification() {
             return response.json();
         })
         .then(data => {
-            const restaurantId = data.restaurantId;
-            const token = data.token; // Ensure token is returned from /getAuth or fetched globally
-            const appUrl = data.app_url;
+             restaurantId = data.restaurantId;
+             token = data.token; // Ensure token is returned from /getAuth or fetched globally
+             appUrl = data.app_url;
 
             // Fetch notifications for the restaurant
             return fetch(`${appUrl}/orders/notification/${restaurantId}`, {
@@ -76,18 +81,43 @@ function getNotification() {
         })
         .then(result => {
             console.log('Notifications:', result);
-            showToast('Notifications fetched successfully!');
-            formData = new FormData();
-            formData.append('restaurantId',restaurantId);
 
-            return fetch(`${appUrl}/orders/status/notification/${result.id}`, {
-                method: "PUT",
-                body: formData,
-                headers: {
-                    'Content-Type': 'application/json', // JSON content type
-                    'Authorization': `Bearer ${result.token}`,
-                },
+
+            // Prepare data to update notification status
+            const requestData = {
+                restaurantId: restaurantId,  // Ensure the restaurantId is available
+            };
+
+            const updatePromises = result.map(element => {
+
+                if(result !=null){
+                    showToast('New Order From TableNo'+element.tableNumber);
+                }
+                return fetch(`${appUrl}/orders/status/notification/${element.id}`, {
+                    method: "PUT",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                    body: JSON.stringify(requestData) // Send the request body as JSON
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log(`Notification ${element.id} status updated successfully!`);
+                    } else {
+                        console.error(`Failed to update notification ${element.id} status`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
             });
+
+            // Wait for all the PUT requests to finish
+            return Promise.all(updatePromises);
+        })
+        .then(() => {
+            console.log('All notification statuses updated!');
         })
         .catch(error => {
             console.error('Error:', error);

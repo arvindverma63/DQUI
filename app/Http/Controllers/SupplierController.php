@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;  // Ensure this is imported
-use Illuminate\Support\Facades\Cache; // Ensure this is imported
+use Illuminate\Support\Facades\Session; // Ensure this is imported
 
 class SupplierController extends Controller
 {
@@ -18,9 +18,9 @@ class SupplierController extends Controller
             'rawItem' => 'required|string|max:255',
         ]);
 
-        // Fetch token and restaurantId from the cache
-        $token = Cache::get('token');
-        $restaurantId = Cache::get('restaurant_id');
+        // Fetch token and restaurantId from the Session
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
 
         // Ensure token and restaurantId exist
         if (!$token || !$restaurantId) {
@@ -48,8 +48,8 @@ class SupplierController extends Controller
     }
     public function deleteSupplier($id)
 {
-    $token = Cache::get('token');
-    $restaurantId = Cache::get('restaurant_id');
+    $token = Session::get('token');
+    $restaurantId = Session::get('restaurant_id');
     $appUrl = env('API_BASE_URL');
 
     // Make API call to delete supplier
@@ -75,8 +75,8 @@ public function updateSupplier(Request $request, $id)
         'phoneNumber' => 'string|max:15'
     ]);
 
-    $token = Cache::get('token');
-    $restaurantId = Cache::get('restaurant_id');
+    $token = Session::get('token');
+    $restaurantId = Session::get('restaurant_id');
     $appUrl = env('API_BASE_URL');
 
     // Make the API call to update the supplier
@@ -99,9 +99,9 @@ public function updateSupplier(Request $request, $id)
 
 public function getSupplier()
 {
-    // Retrieve the token and restaurant ID from cache
-    $token = Cache::get('token');
-    $restaurantId = Cache::get('restaurant_id');
+    // Retrieve the token and restaurant ID from Session
+    $token = Session::get('token');
+    $restaurantId = Session::get('restaurant_id');
     $appUrl = env('API_BASE_URL');
 
     // Ensure token and restaurantId are available

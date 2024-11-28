@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use GuzzleHttp\Client as GuzzleClient;
@@ -29,7 +29,7 @@ class MenuController extends Controller
         // Logging the validated data to confirm structure
         Log::info('Validated Data:', $validatedData);
 
-        $token = Cache::get('token');
+        $token = Session::get('token');
         $baseUrl = env('API_BASE_URL');
 
         // Initialize Guzzle client
@@ -96,8 +96,8 @@ class MenuController extends Controller
 
     public function getCategories()
     {
-        $token = Cache::get('token');
-        $restaurantId = Cache::get('restaurant_id');
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
 
         // Check if token is available
         if (!$token) {
@@ -128,7 +128,7 @@ class MenuController extends Controller
     public function updateMenuItem(Request $request, $id)
     {
         // Retrieve token and base URL, with a check for token presence
-        $token = Cache::get('token');
+        $token = Session::get('token');
         $baseURL = env('API_BASE_URL');
         if (!$token) {
             return response()->json(['message' => 'Authorization token not found'], 401);
@@ -202,8 +202,8 @@ class MenuController extends Controller
     // Delete Menu Item
     public function deleteMenuItem($id)
     {
-        $token = Cache::get('token');
-        $restaurantId = Cache::get('restaurant_id');
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
         $baseURL = env('API_BASE_URL');
 
         // Send the DELETE request to delete the menu item via API
@@ -221,9 +221,9 @@ class MenuController extends Controller
 
     public function getMenu()
     {
-        // Retrieve token and restaurant ID from cache
-        $token = Cache::get('token');
-        $restaurantId = Cache::get('restaurant_id');
+        // Retrieve token and restaurant ID from Session
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
         $baseURL = env('API_BASE_URL');
 
         // Validate essential data before proceeding

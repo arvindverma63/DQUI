@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Http;  // Ensure this is imported
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 
 class InventoryController extends Controller
 {
@@ -19,9 +19,9 @@ class InventoryController extends Controller
             'unit' => 'required|string|max:10',
         ]);
 
-        // Get token and restaurant ID from cache
-        $token = Cache::get('token');
-        $restaurantId = Cache::get('restaurant_id'); // Assuming restaurantId is stored in the cache
+        // Get token and restaurant ID from Session
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id'); // Assuming restaurantId is stored in the Session
         $appUrl = env('API_BASE_URL');
 
         // Ensure the token and restaurantId are set
@@ -50,8 +50,8 @@ class InventoryController extends Controller
 
     public function deleteStock($id)
     {
-        $token = Cache::get('token');
-        $restaurantId = Cache::get('restaurant_id');
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
         $appUrl = env('API_BASE_URL');
 
         // Make API call to delete supplier
@@ -69,8 +69,8 @@ class InventoryController extends Controller
 
     public function getStock()
     {
-        $token = Cache::get('token');
-        $restaurantId = Cache::get('restaurant_id');
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
         $appUrl = env('API_BASE_URL');  // Ensure you have the base URL defined in your .env file
 
         // Ensure token exists
@@ -97,8 +97,8 @@ class InventoryController extends Controller
 
     public function updateStock(Request $request, $id)
     {
-        // Retrieve the token from cache
-        $token = Cache::get('token');
+        // Retrieve the token from Session
+        $token = Session::get('token');
 
         // Get the base URL from the .env file
         $appUrl = env('API_BASE_URL'); // Ensure this is defined in your .env file

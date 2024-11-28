@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -17,17 +17,17 @@ class CategoryController extends Controller
             'categoryImage' => 'image|required|max:2048', // Optional: Max size 2MB
         ]);
 
-        // Retrieve restaurant ID and token from cache
-        $restaurantId = Cache::get('restaurant_id');
-        $token = Cache::get('token'); // Retrieve the bearer token from the cache
+        // Retrieve restaurant ID and token from Session
+        $restaurantId = Session::get('restaurant_id');
+        $token = Session::get('token'); // Retrieve the bearer token from the Session
 
-        // Check if restaurantId and token exist in cache
+        // Check if restaurantId and token exist in Session
         if (!$restaurantId) {
-            return response()->json(['error' => 'Restaurant ID not found in cache.'], 404);
+            return response()->json(['error' => 'Restaurant ID not found in Session.'], 404);
         }
 
         if (!$token) {
-            return response()->json(['error' => 'Authorization token not found in cache.'], 401);
+            return response()->json(['error' => 'Authorization token not found in Session.'], 401);
         }
 
         // Set API base URL from environment
@@ -55,8 +55,8 @@ class CategoryController extends Controller
     }
     public function editCategory($id, Request $request)
 {
-    $token = Cache::get('token');
-    $restaurantId = Cache::get('restaurant_id');
+    $token = Session::get('token');
+    $restaurantId = Session::get('restaurant_id');
     $baseURL = env('API_BASE_URL');
 
     $data = [
@@ -88,9 +88,9 @@ class CategoryController extends Controller
 
 public function deleteCategory($id)
 {
-    // Retrieve the token and restaurantId from cache
-    $token = Cache::get('token');
-    $restaurantId = Cache::get('restaurant_id');
+    // Retrieve the token and restaurantId from Session
+    $token = Session::get('token');
+    $restaurantId = Session::get('restaurant_id');
     $baseURL = env('API_BASE_URL'); // Ensure correct usage of env()
 
     // Check if the token exists

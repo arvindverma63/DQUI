@@ -20,7 +20,7 @@
                         <img src="{{ $menuItem['itemImage'] }}" alt="{{ $menuItem['itemName'] }}" style="width: 50px; height: auto;">
                     </td>
                     <td>{{ $menuItem['itemName'] }}</td>
-                    <td>${{ $menuItem['price'] }}</td>
+                    <td>₹{{ $menuItem['price'] }}</td>
                     <td>{{ \Carbon\Carbon::parse($menuItem['created_at'])->format('d-m-Y H:i') }}</td>
                     <td>{{ \Carbon\Carbon::parse($menuItem['updated_at'])->format('d-m-Y H:i') }}</td>
                     <td>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -15,9 +15,9 @@ class PageController extends Controller
     }
     public function category()
 {
-    // Retrieve the token and restaurantId from the cache
-    $token = Cache::get('token');
-    $restaurantId = Cache::get('restaurant_id');
+    // Retrieve the token and restaurantId from the Session
+    $token = Session::get('token');
+    $restaurantId = Session::get('restaurant_id');
 
     // Check if token is available
     if (!$token) {
@@ -61,8 +61,8 @@ class PageController extends Controller
 
 public function menu()
 {
-    $token = Cache::get('token');
-    $restaurantId = Cache::get('restaurant_id');
+    $token = Session::get('token');
+    $restaurantId = Session::get('restaurant_id');
 
     // Check if token is available
     if (!$token) {
@@ -106,8 +106,8 @@ public function menu()
 
 
     public function order(){
-        $token = Cache::get('token');
-        $restaurantId = Cache::get('restaurant_id');
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
         $app_url = env('API_BASE_URL');
 
         // Ensure token exists
@@ -145,8 +145,8 @@ public function menu()
     }
     public function supplier()
     {
-        $token = Cache::get('token');
-        $restaurantId = Cache::get('restaurant_id');
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
         $appUrl = env('API_BASE_URL');  // Ensure you have the base URL defined in your .env file
 
         // Ensure token exists
@@ -172,8 +172,8 @@ public function menu()
     }
 
     public function stock(){
-        $token = Cache::get('token');
-        $restaurantId = Cache::get('restaurant_id');
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
         $appUrl = env('API_BASE_URL');  // Ensure you have the base URL defined in your .env file
 
         // Ensure token exists

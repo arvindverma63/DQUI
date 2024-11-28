@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Log;
 
@@ -68,20 +68,20 @@ class AuthController extends Controller
                 return redirect()->route('login')->withErrors(['message' => 'Incomplete data received from API.']);
             }
 
-            // Store the token and other values in cache
-            Cache::put('token', $token, now()->addMinutes(600));
-            Cache::put('user_id', $user_id, now()->addMinutes(600));
-            Cache::put('restaurant_id', $restaurant_id, now()->addMinutes(600));
+            // Store the token and other values in Session
+            Session::put('token', $token, now()->addMinutes(600));
+            Session::put('user_id', $user_id, now()->addMinutes(600));
+            Session::put('restaurant_id', $restaurant_id, now()->addMinutes(600));
 
-            // Debugging: Log the cache values to ensure they are stored
-            Log::info('Token Stored in Cache: ' . Cache::get('token'));
-            Log::info('User ID Stored in Cache: ' . Cache::get('user_id'));
-            Log::info('Restaurant ID Stored in Cache: ' . Cache::get('restaurant_id'));
+            // Debugging: Log the Session values to ensure they are stored
+            Log::info('Token Stored in Session: ' . Session::get('token'));
+            Log::info('User ID Stored in Session: ' . Session::get('user_id'));
+            Log::info('Restaurant ID Stored in Session: ' . Session::get('restaurant_id'));
 
-            // Check if cache has values
-            if (!Cache::has('token') || !Cache::has('user_id') || !Cache::has('restaurant_id')) {
-                Log::error('Failed to store data in cache');
-                return redirect()->route('login')->withErrors(['message' => 'Failed to store data in cache.']);
+            // Check if Session has values
+            if (!Session::has('token') || !Session::has('user_id') || !Session::has('restaurant_id')) {
+                Log::error('Failed to store data in Session');
+                return redirect()->route('login')->withErrors(['message' => 'Failed to store data in Session.']);
             }
 
             // Optionally store email in the session
@@ -96,10 +96,10 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        // Clear the cached token, user_id, and restaurant_id
-        Cache::forget('token');
-        Cache::forget('user_id');
-        Cache::forget('restaurant_id');
+        // Clear the Sessiond token, user_id, and restaurant_id
+        Session::forget('token');
+        Session::forget('user_id');
+        Session::forget('restaurant_id');
 
         // Clear the session
         $request->session()->flush();
@@ -108,8 +108,8 @@ class AuthController extends Controller
         return redirect()->route('login')->with('message', 'Logged out successfully.');
     }
     public function getAuth(){
-        $token = Cache::get('token');
-        $restaurantId = Cache::get('restaurant_id');
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
         $app_url = env('API_BASE_URL');
 
         return response()->json([

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -14,8 +14,8 @@ class TransactionController extends Controller
 
     public function __construct()
     {
-        $this->token = Cache::get('token');
-        $this->restaurantId = Cache::get('restaurant_id');
+        $this->token = Session::get('token');
+        $this->restaurantId = Session::get('restaurant_id');
         $this->baseUrl = env('API_BASE_URL');
     }
 

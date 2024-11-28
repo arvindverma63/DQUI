@@ -48,7 +48,7 @@
                                             {{ ucfirst($order['status']) }}
                                         </span>
                                     </td>
-                                    <td class="cell">${{ number_format($order['total'], 2) }}</td>
+                                    <td class="cell">₹{{ number_format($order['total'], 2) }}</td>
                                     <td class="cell">
                                         <!-- Button triggers offcanvas for order details -->
                                         <button class="btn-sm app-btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#orderDetailsCanvas{{ $order['order_id'] }}">
@@ -67,7 +67,7 @@
                                         <p><strong>Customer:</strong> {{ $order['user']['name'] ?? 'N/A' }}</p>
                                         <p><strong>Table Number:</strong> {{ $order['table_number'] }}</p>
                                         <p><strong>Status:</strong> {{ ucfirst($order['status']) }}</p>
-                                        <p><strong>Total:</strong> ${{ number_format($order['total'], 2) }}</p>
+                                        <p><strong>Total:</strong> ₹{{ number_format($order['total'], 2) }}</p>
                                         <p><strong>Items:</strong></p>
                                         <ul>
                                             @foreach ($order['order_details'] as $item)

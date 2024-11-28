@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Response;
 
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 
@@ -12,8 +12,8 @@ class OrderController extends Controller
 {
     public function getOrders()
 {
-    $token = Cache::get('token');
-    $restaurantId = Cache::get('restaurant_id');
+    $token = Session::get('token');
+    $restaurantId = Session::get('restaurant_id');
     $app_url = env('API_BASE_URL');
 
     // Ensure token exists
@@ -45,8 +45,8 @@ public function updateStatus(Request $request, $id)
         'status' => 'required|in:processing,accept,reject,complete',
     ]);
 
-    // Get token and restaurant ID from cache
-    $token = Cache::get('token');
+    // Get token and restaurant ID from Session
+    $token = Session::get('token');
     $status = $request->input('status');  // Get the new status from the request
     $app_url = env('API_BASE_URL');
 
@@ -72,8 +72,8 @@ public function updateStatus(Request $request, $id)
 }
 
 public function getNotification(){
-    $token = Cache::get('token');
-    $restaurantId = Cache::get('restaurant_id');
+    $token = Session::get('token');
+    $restaurantId = Session::get('restaurant_id');
     $app_url = env('API_BASE_URL');
     $response = Http::withHeaders([
         'Authorization'=>'Bearer'.$token,

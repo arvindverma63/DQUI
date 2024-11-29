@@ -66,11 +66,7 @@
                     </div><!--//auth-form-container-->
                 </div><!--//auth-body-->
 
-                <footer class="app-auth-footer">
-                    <div class="container text-center py-3">
-                        <small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart" style="color: #fb866a;"></i> by <a class="app-link" href="http://themes.3rdwavemedia.com" target="_blank">DICUI</a> for developers</small>
-                    </div>
-                </footer><!--//app-auth-footer-->
+
             </div><!--//flex-column-->
         </div><!--//auth-main-col-->
 
@@ -82,7 +78,7 @@
                     <div class="h-100"></div>
                     <div class="overlay-content p-3 p-lg-4 rounded">
                         <h5 class="mb-3 overlay-title">Explore DQ Admin Dashboard</h5>
-                        <div>DQ is a premium restaurant management system developed by SVINFOTECH
+                        <div>DQ is a premium restaurant management system developed by ACT
                             <a href="https://svinfotech.co.in">here</a>.
                         </div>
                     </div>

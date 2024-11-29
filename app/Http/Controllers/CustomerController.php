@@ -9,18 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class CustomerController extends Controller
 {
-    // Define class properties to store token, restaurantId, and baseUrl
-    protected $token;
-    protected $restaurantId;
-    protected $baseUrl;
 
-    // Initialize these properties in the constructor
-    public function __construct()
-    {
-        $this->token = Session::get('token');
-        $this->restaurantId = Session::get('restaurant_id');
-        $this->baseUrl = env('API_BASE_URL');
-    }
 
     /**
      * Add a new customer to the system.
@@ -30,15 +19,18 @@ class CustomerController extends Controller
      */
     public function addCustomer(Request $request)
     {
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
+        $baseUrl = env('API_BASE_URL');
         // Send request to API with Authorization header and post data
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $this->token,
-        ])->post($this->baseUrl . '/customer', [
+            'Authorization' => 'Bearer ' . $token,
+        ])->post($baseUrl . '/customer', [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'phoneNumber' => $request->input('phoneNumber'),
             'address' => $request->input('address'),
-            'restaurantId' => $this->restaurantId
+            'restaurantId' => $restaurantId
         ]);
 
         // Check if the response is successful
@@ -59,10 +51,13 @@ class CustomerController extends Controller
      */
     public function getCustomer()
     {
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
+        $baseUrl = env('API_BASE_URL');
         // Send a GET request to the API to retrieve customer data
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $this->token,
-        ])->get($this->baseUrl . '/customer/' . $this->restaurantId);
+            'Authorization' => 'Bearer ' . $token,
+        ])->get($baseUrl . '/customer/' . $restaurantId);
 
         // Check if the request was successful
         if ($response->successful()) {
@@ -79,11 +74,14 @@ class CustomerController extends Controller
 
     public function customerTable()
     {
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
+        $baseUrl = env('API_BASE_URL');
         try {
             // Send a GET request to the API to retrieve customer data
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $this->token,
-            ])->get($this->baseUrl . '/customer/' . $this->restaurantId);
+                'Authorization' => 'Bearer ' . $token,
+            ])->get($baseUrl . '/customer/' . $restaurantId);
 
             // Check if the response is successful
             if ($response->successful()) {

@@ -9,21 +9,14 @@ use Illuminate\Support\Facades\Log;
 
 class QrController extends Controller
 {
-    protected $token;
-    protected $restaurantId;
-    protected $baseUrl;
-
-    public function __construct()
-    {
-        $this->token = Session::get('token');
-        $this->restaurantId = Session::get('restaurant_id');
-        $this->baseUrl = env('API_BASE_URL');
-    }
     public function qrView()
     {
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
+        $baseUrl = env('API_BASE_URL');
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $this->token,
-        ])->get($this->baseUrl . '/qr/' . $this->restaurantId);
+            'Authorization' => 'Bearer ' . $token,
+        ])->get($baseUrl . '/qr/' . $restaurantId);
 
         if ($response->successful()) {
             return view('qr', ['data' => $response->json()]);
@@ -42,11 +35,14 @@ class QrController extends Controller
 
     public function addQr(Request $request)
     {
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
+        $baseUrl = env('API_BASE_URL');
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $this->token
-        ])->post($this->baseUrl . '/qr/create', [
+            'Authorization' => 'Bearer ' . $token
+        ])->post($baseUrl . '/qr/create', [
             'tableNo' => $request->input('tableNumber'),
-            'restaurantId' => $this->restaurantId,
+            'restaurantId' => $restaurantId,
         ]);
 
 
@@ -61,9 +57,12 @@ class QrController extends Controller
     }
 
     public function deleteQr($id){
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
+        $baseUrl = env('API_BASE_URL');
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer'.$this->token,
-        ])->delete($this->baseUrl.'/qr/delete/'.$id);
+            'Authorization' => 'Bearer'.$token,
+        ])->delete($baseUrl.'/qr/delete/'.$id);
 
         if ($response->successful()) {
             return redirect()->back()->with('success', 'QR deleted Successfully');

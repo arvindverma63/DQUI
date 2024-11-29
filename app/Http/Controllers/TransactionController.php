@@ -8,26 +8,19 @@ use Illuminate\Support\Facades\Log;
 
 class TransactionController extends Controller
 {
-    protected $token;
-    protected $restaurantId;
-    protected $baseUrl;
-
-    public function __construct()
-    {
-        $this->token = Session::get('token');
-        $this->restaurantId = Session::get('restaurant_id');
-        $this->baseUrl = env('API_BASE_URL');
-    }
 
     public function addTransaction()
     {
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
+        $baseUrl = env('API_BASE_URL');
         // Check if all required data exists
-        if (!$this->token || !$this->restaurantId || !$this->baseUrl) {
+        if (!$token || !$restaurantId || !$baseUrl) {
             // Log the missing data for debugging
             Log::error('Missing configuration data', [
-                'token' => $this->token,
-                'restaurantId' => $this->restaurantId,
-                'baseUrl' => $this->baseUrl,
+                'token' => $token,
+                'restaurantId' => $restaurantId,
+                'baseUrl' => $baseUrl,
             ]);
 
             return response()->json([
@@ -39,9 +32,9 @@ class TransactionController extends Controller
         // Prepare response data
         $data = [
             'success' => true,
-            'token' => $this->token,
-            'restaurantId' => $this->restaurantId,
-            'baseUrl' => $this->baseUrl,
+            'token' => $token,
+            'restaurantId' => $restaurantId,
+            'baseUrl' => $baseUrl,
         ];
 
         return response()->json($data, 200);

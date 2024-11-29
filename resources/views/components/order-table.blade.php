@@ -34,7 +34,7 @@
                             <tbody id="orders-tbody">
                                 @foreach ($orders as $order)
                                 <tr>
-                                    <td class="cell">#{{ $order['order_id'] }}</td>
+                                    <td class="cell">{{ $order['order_id'] }}</td>
                                     <td class="cell">
                                         @foreach ($order['order_details'] as $item)
                                             <div>{{ $item['item_name'] ?? 'Item Name N/A' }} (x{{ $item['quantity'] }})</div>

@@ -49,7 +49,7 @@
                     </div>
 
                     <!-- Hidden Restaurant ID -->
-                    <input type="hidden" name="restaurantId" value="{{ Cache::get('restaurant_id') }}">
+                    <input type="hidden" name="restaurantId" value="{{ Session::get('restaurant_id') }}">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

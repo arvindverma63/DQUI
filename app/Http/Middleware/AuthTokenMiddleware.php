@@ -3,14 +3,14 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 
 class AuthTokenMiddleware
 {
     public function handle($request, Closure $next)
     {
         // Retrieve the token from cache (no email in the key)
-        $token = Cache::get('token');  // Use the same cache key as in AuthController
+        $token = Session::get('token');  // Use the same cache key as in AuthController
 
         // Check if token exists
         if (!$token) {

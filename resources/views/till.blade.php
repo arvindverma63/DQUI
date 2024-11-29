@@ -35,12 +35,39 @@
 
                         <div class="row">
                             <!-- Product Section -->
-                            <div class="col-md-8">
-                                <h5 class="mb-3 fw-bold text-secondary">Products</h5>
-                                <div class="row" id="product-container">
-                                   <script src="{{asset('assets/js/till/cart.js')}}"></script>
-                               </div>
-                            </div>
+                           <div class="col-md-8" id="product-col">
+    <h5 class="mb-3 fw-bold text-secondary">Products</h5>
+    <div class="row" id="product-container">
+        <script src="{{asset('assets/js/till/cart.js')}}"></script>
+    </div>
+</div>
+<style>
+    #product-col {
+        max-height: 450px;
+        overflow-y: auto;
+        display: block; /* Ensure block display */
+    }
+
+    /* Webkit Scrollbar styling */
+    #product-col::-webkit-scrollbar {
+        width: 2px; /* Scrollbar width */
+    }
+
+    #product-col::-webkit-scrollbar-thumb {
+        background-color: #888; /* Color of the scrollbar thumb */
+        border-radius: 4px; /* Rounded corners for the scrollbar thumb */
+    }
+
+    #product-col::-webkit-scrollbar-thumb:hover {
+        background-color: #555; /* Hover color for the scrollbar thumb */
+    }
+
+    #product-col::-webkit-scrollbar-track {
+        background: #f1f1f1; /* Track color */
+        border-radius: 4px; /* Rounded corners for the track */
+    }
+</style>
+
 
                             <!-- Cart Section -->
                             <div class="col-md-4">

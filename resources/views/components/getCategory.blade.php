@@ -110,10 +110,6 @@
     @endforeach
 </div>
 
-<!-- Dynamic Pagination -->
-<nav class="app-pagination mt-5">
-    {{ $categories->links() }}
-</nav>
 
 <script>
     // Search Categories by Name

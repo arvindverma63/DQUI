@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
             paging: true,
             searching: true,
             ordering: true,
+            order: [[0, 'desc']],
             dom: 'Bfrtip',
             buttons: [
                 {
@@ -68,6 +69,29 @@ document.addEventListener('DOMContentLoaded', function () {
                     title: 'Transactions Data',
                     orientation: 'landscape', // Adjust orientation for better layout
                     pageSize: 'A4'
+                },
+                {
+                    extend: 'print',
+                    text: 'Print',
+                    className: 'btn btn-info text-white',
+                    title: 'Transactions Data'
+                },
+                {
+                    text: 'Reverse Order', // Button text for reverse
+                    className: 'btn btn-warning text-white',
+                    action: function(e, dt, button, config) {
+                        // Get the current order of the table
+                        var currentOrder = dt.order();
+                        
+                        // Reverse the order
+                        if (currentOrder[0][0] === 0) {
+                            // If it is already in descending order, change to ascending
+                            dt.order([0, 'asc']).draw();
+                        } else {
+                            // If it is in ascending order, change to descending
+                            dt.order([0, 'desc']).draw();
+                        }
+                    }
                 }
             ]
         });

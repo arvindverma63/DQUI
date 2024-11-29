@@ -5,25 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class ReportController extends Controller
 {
-    protected $token;
-    protected $restaurantId;
-    protected $baseUrl;
 
-    public function __construct()
+    public function stats()
     {
-        $this->token = Session::get('token');
-        $this->restaurantId = Session::get('restaurant_id');
-        $this->baseUrl = env('API_BASE_URL');
-    }
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
+        $baseUrl = env('API_BASE_URL');
+        $response = Http::get($baseUrl.'/reports/'.$restaurantId);
 
-    public function stats(){
-        $response = Http::withHeaders([
-            'Authorization'=> 'Bearer'.$this->token,
-        ])->get($this->baseUrl.'/reports/'.$this->restaurantId);
+        if ($response->successful()) {
+            return response()->json($response->json());
+        }
 
-        return response()->json($response->json());
+        // Handle error response
+        return response()->json([
+            'error' => 'Failed to fetch data',
+            'message' => $response->body(),
+            'url'=>$restaurantId,
+        ], $response->status());
     }
 }

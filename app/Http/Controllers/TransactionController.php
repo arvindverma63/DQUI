@@ -42,6 +42,13 @@ class TransactionController extends Controller
 
     public function getTransactions()
     {
-        return view('transactions');
+        $token = Session::get('token');
+        $restaurantId = Session::get('restaurant_id');
+        $baseUrl = env('API_BASE_URL');
+
+        $response = Http::withHeaders([
+            'Authorization'=>'Bearer'.$token,
+        ])->get($baseUrl.'/transactions/'.$restaurantId);
+        return view('transactions',['data'=>$response->json()]);
     }
 }

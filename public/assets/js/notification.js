@@ -126,4 +126,4 @@ function getNotification() {
 }
 
 // Poll the server every 5 seconds
-setInterval(getNotification, 5000);
+setInterval(getNotification, 500000);

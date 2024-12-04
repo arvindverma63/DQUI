@@ -64,11 +64,12 @@ async function payment(user_id, items, token, restaurantId, baseUrl) {
             typeof globalTotalPrice === 'undefined' || typeof globalTotalPayable === 'undefined') {
             throw new Error('Transaction data is incomplete. Please review your cart.');
         }
-        
+
         // Step 3.1: Set `globalTotalPayable` to `globalTotalPrice` if no valid tax or discount is provided
         if (globalTaxValue === 0 && globalDiscountValue === 0) {
             globalTotalPayable = globalTotalPrice;
         }
+        var tableNumber = document.getElementById('tableNumber').value;
 
         // Step 4: Prepare request payload
         const requestData = {
@@ -79,7 +80,8 @@ async function payment(user_id, items, token, restaurantId, baseUrl) {
             sub_total: globalTotalPrice || 0,
             total: globalTotalPayable || 0,
             type: paymentType,
-            restaurantId: restaurantId
+            restaurantId: restaurantId,
+            tableNumber: tableNumber
         };
 
         // Step 5: Send transaction request

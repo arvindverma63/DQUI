@@ -72,13 +72,11 @@ function sendData(data) {
         console.error('Invalid data object passed to sendData:', data);
         return;
     }
-    var tableNumber = document.getElementById('tableNumber').value;
 
     const formData = new FormData();
     formData.append('itemId', data.id);
     formData.append('itemName', data.itemName);
     formData.append('price', data.price);
-    formData.append('tableNumber',tableNumber);
 
     fetch('/addData', {
         method: 'POST',

@@ -94,10 +94,12 @@ class SessionController extends Controller
      */
     public function clearSession()
     {
-        session()->flush(); // Clear all session data
+        // Remove specific session keys
+        session()->forget(['id', 'name', 'items','customer']);
 
-        return redirect()->back()->with('message', 'Session cleared successfully!');
+        return redirect()->back()->with('message', 'Selected session data cleared successfully!');
     }
+
     public function removeItem(Request $request)
     {
         $request->validate([

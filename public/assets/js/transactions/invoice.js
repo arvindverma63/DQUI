@@ -39,8 +39,8 @@ window.getInvoice = async function (id) {
                             ${transactionData.restaurantAddress}
                         </div>
                         <div style="width: 48%; text-align: right;">
-                            <strong>Acme Corp.</strong><br>
-                            ${transactionData.userName}<br>
+                            <strong>Acme Corp.</strong><br> <b>Customer</b>
+                            ${transactionData.userName}  <br><b>Table Number:</b> ${transactionData.tableNumber}<br>
                         </div>
                     </div>
 
@@ -69,15 +69,16 @@ window.getInvoice = async function (id) {
                                 <div>${item.itemName}</div>
                                 <div>${item.price}</div>
                                 <div>${item.quantity}</div>
-                                <div>${(item.price * item.quantity).toFixed(2)}</div>
+                                <div>₹${(item.price * item.quantity).toFixed(2)}</div>
                             </div>
                         `).join('')}
                     </div>
 
                     <!-- Total Amount -->
                     <div style="border: 2px solid #eee; padding: 20px; text-align: right;">
-                        <strong>Discount:</strong> ${transactionData.discount}<br>
-                        <strong>Total:</strong> ${transactionData.total}
+                        <strong>Discount:</strong>₹ ${transactionData.discount}<br>
+                        <strong>Discount:</strong>₹ ${transactionData.tax}<br>
+                        <strong>Total:</strong>₹ ${transactionData.total}
                     </div>
 
                     <!-- Print Button -->

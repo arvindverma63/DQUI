@@ -12,6 +12,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\QrController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\TillController;
 use App\Http\Controllers\TransactionController;
 use GuzzleHttp\Cookie\SessionCookieJar;
 use Illuminate\Contracts\Session\Session;
@@ -91,6 +92,7 @@ Route::middleware(['auth.token'])->group(function () {
     Route::get('/qr',[QrController::class,'qrView'])->name('qr');
     Route::post('/addQr',[QrController::class,'addQr']);
     Route::get('/deleteQr/{id}',[QrController::class,'deleteQr']);
+    Route::get('/selectTable',[TillController::class,'selectTable']);
 
     Route::get('/getNotification',[OrderController::class,'getNotification']);
 });

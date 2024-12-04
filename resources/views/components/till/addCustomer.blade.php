@@ -56,7 +56,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">Close</button>
-                <button type="submit" form="customerForm" class="btn btn-primary text-white">Save changes</button>
+                <button type="submit" form="customerForm" class="btn btn-primary text-white" >Save changes</button>
             </div>
         </div>
     </div>

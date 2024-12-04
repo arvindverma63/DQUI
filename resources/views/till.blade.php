@@ -21,7 +21,7 @@
                                 <input type="text" class="form-control mb-2 mb-md-0 w-100 w-md-25 me-md-2"
                                     placeholder="Search" id="menu-search">
                                 <select class="form-select mb-2 mb-md-0 w-100 w-md-25 me-md-2">
-                                    <option selected>View All {{$tableNumber}}</option>
+                                    <option value="{{$tableNumber}}" id="tableNumber" selected>Table Number {{$tableNumber}}</option>
                                     <!-- Add other options here -->
                                 </select>
                                 <div class="d-flex flex-column flex-md-row align-items-center w-100 w-md-auto">
@@ -38,7 +38,7 @@
                            <div class="col-md-8" id="product-col">
     <h5 class="mb-3 fw-bold text-secondary">Products</h5>
     <div class="row" id="product-container">
-        <script src="{{asset('assets/js/till/cart.js')}}"></script>
+
     </div>
 </div>
 <style>
@@ -124,7 +124,7 @@
 
 
     </div><!--//app-wrapper-->
-
+    <script src="{{asset('assets/js/till/cart.js')}}"></script>
     @include('partials.footer')
 
 </body>

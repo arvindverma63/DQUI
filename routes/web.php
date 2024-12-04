@@ -12,6 +12,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\QrController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\TillController;
 use App\Http\Controllers\TransactionController;
 use GuzzleHttp\Cookie\SessionCookieJar;
 use Illuminate\Contracts\Session\Session;
@@ -73,7 +74,7 @@ Route::middleware(['auth.token'])->group(function () {
 
     Route::get('getAllStocks', [InventoryController::class, 'getStock'])->name('getAllStock');
     Route::put('/updateMenuStock/{id}', [MenuController::class, 'updateMenuStock'])->name('updateMenuStock');
-    Route::get('till', [PageController::class, 'till'])->name('till');
+    Route::get('/till', [PageController::class, 'till'])->name('till');
     Route::post('/addCustomer', [CustomerController::class, 'addCustomer'])->name('addCustomer');
     Route::get('/getCustomer', [CustomerController::class, 'getCustomer'])->name('getCustomer');
     Route::post('/addData', [SessionController::class, 'addData'])->name('addData');
@@ -91,6 +92,7 @@ Route::middleware(['auth.token'])->group(function () {
     Route::get('/qr',[QrController::class,'qrView'])->name('qr');
     Route::post('/addQr',[QrController::class,'addQr']);
     Route::get('/deleteQr/{id}',[QrController::class,'deleteQr']);
+    Route::get('/selectTable',[TillController::class,'selectTable'])->name('selectTable');
 
     Route::get('/getNotification',[OrderController::class,'getNotification']);
 });

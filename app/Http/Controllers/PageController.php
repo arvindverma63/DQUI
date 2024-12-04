@@ -198,8 +198,9 @@ public function menu()
         }
     }
 
-    public function till(){
-        return view('till');
+    public function till(Request $request){
+        $id = $request->tableNumber;
+        return view('till',['tableNumber'=>$id]);
     }
 
 }

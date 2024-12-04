@@ -219,7 +219,7 @@
                     </li><!--//nav-item-->
                     <li class="nav-item">
                         <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                        <a class="nav-link {{ Route::is('till') ? 'active' : '' }}" href="{{ route('till') }}">
+                        <a class="nav-link {{ Route::is('selectTable') ? 'active' : '' }}" href="{{ route('selectTable') }}">
                             <span class="nav-icon">
                                 <i class="fa-solid fa-sack-dollar"></i>
                             </span>

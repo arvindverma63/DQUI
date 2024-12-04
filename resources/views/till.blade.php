@@ -21,11 +21,11 @@
                                 <input type="text" class="form-control mb-2 mb-md-0 w-100 w-md-25 me-md-2"
                                     placeholder="Search" id="menu-search">
                                 <select class="form-select mb-2 mb-md-0 w-100 w-md-25 me-md-2">
-                                    <option selected>View All</option>
+                                    <option selected disabled>Table Number {{$tableNumber}}</option>
                                     <!-- Add other options here -->
                                 </select>
                                 <div class="d-flex flex-column flex-md-row align-items-center w-100 w-md-auto">
-                                    <span class="me-md-3 fw-bold" id="custName">Walking Customer</span>
+                                    <span class="me-md-3 fw-bold" id="custName">Select Customer</span>
                                         <button class="btn btn-success btn-sm px-3" style="font-weight: bold;" data-bs-toggle="modal" data-bs-target="#addCustomerModal">+</button>
 
                                 </div>
@@ -94,7 +94,7 @@
                                         <button class="btn btn-success btn-sm text-white mb-2" data-bs-toggle="modal" data-bs-target="#discountModal">Discount</button>
                                         <div class="d-flex justify-content-between fw-bold text-dark" id="totalPay">
                                             <span>Total Payable:</span>
-                                            <span>₹40.00</span>
+                                            <span>₹00.00</span>
                                         </div>
 
                                     </div>

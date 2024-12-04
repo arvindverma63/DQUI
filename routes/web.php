@@ -92,7 +92,7 @@ Route::middleware(['auth.token'])->group(function () {
     Route::get('/qr',[QrController::class,'qrView'])->name('qr');
     Route::post('/addQr',[QrController::class,'addQr']);
     Route::get('/deleteQr/{id}',[QrController::class,'deleteQr']);
-    Route::get('/selectTable',[TillController::class,'selectTable']);
+    Route::get('/selectTable',[TillController::class,'selectTable'])->name('selectTable');
 
     Route::get('/getNotification',[OrderController::class,'getNotification']);
 });
